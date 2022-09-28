@@ -16,7 +16,7 @@ html, body {
 body {
     font-family: "Nunito", sans-serif;
     text-align: center;
-    background: rgba(235, 235, 235, 0.9);
+    background: rgba(0, 0, 0, 0.9);
 }
 
 header {
@@ -30,26 +30,26 @@ header {
 
 header h1 {
     font-size: 1.25em;
-    color: rgba(50, 50, 50, 0.9);
+    color: rgba(255, 0, 0, 0.9);
     margin-top: 35px;
 }
 
 .search-input {
     padding: 0.4rem 1rem;
-    border: 1px solid rgba(200, 200, 200, 0.9);
+    border: 1px solid rgba(255, 0, 0, 0.9);
     border-radius: 0.25rem 0 0 0.25rem ;
     max-width: 20rem;
     transition: .4s ease-out;
 }
 
 .search-input:active, .search-input:hover, .search-input:focus {
-    border: 1px solid rgba(50, 50, 50, 0.9);
+    border: 1px solid rgba(255, 0, 0, 0.9);
 }
 
 .search-submit {
     cursor: pointer;
     height: 33px;
-    background: rgba(245, 245, 245, 0.9);
+    background: rgba(228, 68, 68, 0.9);
     border-radius: 0 0.25rem 0.25rem 0;
     border: 1px solid rgba(200, 200, 200, 0.9);
     transition: .4s ease-out;
@@ -85,7 +85,7 @@ header h1 {
     max-width: 360px;
     margin: 10px 10px 20px;
     padding: 10px;
-    background: rgba(245, 245, 245, 0.9);
+    background: rgba(27, 24, 24, 0.9);
     border-radius: 0.25em;
     border: 1px solid rgba(50, 50, 50, 0.3);
     transition: .4s ease-out;
@@ -104,11 +104,12 @@ header h1 {
 
 .card-name {
     margin: 20px auto 0;
+    color:azure
 }
 
 .card-text {
     font-size: 0.9em;
-    color: rgba(50, 50, 50, 0.7);
+    color: rgba(220, 220, 220, 0.7);
     margin: 7px auto;
     transition: .4s ease-out;
 }
@@ -244,16 +245,16 @@ header h1 {
 @media (min-width: 1024px) {
 
     .card:hover {
-        background: rgba(255, 255, 255, 1);
+        background: rgb(66, 66, 66);
         border: 1px solid rgba(50, 50, 50, 0.9);
     }
 
     .card:hover .card-text {
-        color: rgba(25, 25, 25, 1); 
+        color: rgb(189, 189, 189); 
     }
 
     .btn:hover {
-        background: rgba(255, 255, 255, 1);
+        background: rgb(0, 0, 0);
         color: rgba(25, 25, 25, 1); 
     }
 }
