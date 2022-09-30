@@ -5,6 +5,8 @@ let modalIndex;
 
 // ------------------------------------------
 //  Search Bar
+//
+//  Inserting html for the search bar
 // ------------------------------------------
 
 const searchHTML = `<form action="#" method="get">
@@ -14,9 +16,9 @@ const searchHTML = `<form action="#" method="get">
 searchContainer.insertAdjacentHTML("beforeend", searchHTML);
 const search = document.getElementById("search-input");
 
-// ------------------------------------------
-//  Load Profile
-// ------------------------------------------
+// --------------------------------------------------------------------------
+//  Loading 12 profiles data from random users api to be stored in a variable.
+// --------------------------------------------------------------------------
 
 const loadHumanData = async () => {
   try {
@@ -29,10 +31,12 @@ const loadHumanData = async () => {
   }
 };
 
-// ------------------------------------------
-//  Show 12 Humans
-// ------------------------------------------
 loadHumanData().then(() => {
+// --------------------------------------------------
+//  Show 12 Humans
+//
+//  Iterate over api data to be displayed in gallery.
+// --------------------------------------------------
   for (i = 0; i <= humanData.length - 1; i++) {
     const galleryHTML = `
       <div class="card" data-index-number="${[i]}">
@@ -50,12 +54,15 @@ loadHumanData().then(() => {
 
   // ------------------------------------------
   //  Modal Window
+  //
+  //  overlay whenever a human profile is clicked on.
   // ------------------------------------------
   const displayModal = (event) => {
     for (i = 0; i <= humanData.length - 1; i++) {
       if (event.target.getAttribute("data-index-number") === `${i}`) {
       
         // Reformatting data for inserting html
+        // need to condense the api data to be inserted into html
         // ------------------------------------------
         const reformatPhone = (phoneNumberString) => {
           const cleaned = ("" + phoneNumberString).replace(/\D/g, "");
@@ -91,24 +98,14 @@ loadHumanData().then(() => {
                   <div class="modal">
                       <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
                       <div class="modal-info-container">
-                          <img class="modal-img" src="${
-                            humanData[index].picture.large
-                          }" alt="profile picture">
-                          <h3 id="name" class="modal-name cap">${
-                            humanData[index].name.first
-                          }, ${humanData[index].name.last}</h3>
+                          <img class="modal-img" src="${humanData[index].picture.large}" alt="profile picture">
+                          <h3 id="name" class="modal-name cap">${humanData[index].name.first}, ${humanData[index].name.last}</h3>
                           <p class="modal-text">${humanData[index].email}</p>
-                          <p class="modal-text cap">${
-                            humanData[index].location.city
-                          }</p>
+                          <p class="modal-text cap">${humanData[index].location.city}</p>
                           <hr>
-                          <p class="modal-text">${reformatPhone(
-                            humanData[index].cell
-                          )}</p>
+                          <p class="modal-text">${reformatPhone( humanData[index].cell )}</p>
                           <p class="modal-text">${reformatLocation}</p>
-                          <p class="modal-text">${reformatBirthday(
-                            humanData[index].dob.date
-                          )}</p>
+                          <p class="modal-text">${reformatBirthday( humanData[index].dob.date )}</p>
                       </div>
                   </div>
 
@@ -120,14 +117,16 @@ loadHumanData().then(() => {
         );
 
         
-        //  Close modal window
-        // ------------------------------------------
+        //  Close modal window connected to the close button
+        // -------------------------------------------------
         const modalWindow = document.getElementsByClassName("modal-container")[0];
         const modalClose = document.getElementById("modal-close-btn");
         modalClose.addEventListener("click", (event) => {
           modalWindow.remove();
         });
 
+        //  Prev and next button to cycle through profiles
+        // -------------------------------------------------
         let modalPrev = document.getElementById('modal-prev');
         let modalNext = document.getElementById('modal-next');;
 
@@ -150,6 +149,7 @@ loadHumanData().then(() => {
         }
           });
       }
+        //called function with insert modal html.
         insertModalHtml(i);
 
       }
@@ -161,14 +161,15 @@ loadHumanData().then(() => {
   //  Event Listeners
   // ------------------------------------------
   
-
+  // Display overlay dependent on what profile clicked.
+  // on empty space click doesnt register
   gallery.addEventListener("click", (event) => {
-    // on empty space click doesnt register
     if (event.target.className !== "gallery") {
       displayModal(event);
     }
   });
 
+  // Listening for input keyup to filter out profiles based on name.
   search.addEventListener("keyup", (event) => {
     let currentValue = event.target.value.toLowerCase();
     let humans = document.querySelectorAll("h3");
@@ -182,7 +183,10 @@ loadHumanData().then(() => {
   });
 
   // ------------------------------------------
-  //  Animation
+  //  Animation:
+  //
+  //  Used for random animation to fade in all 
+  //  profiles whenever refreshed.
   // ------------------------------------------
 
   const humanCards = document.querySelectorAll(".card");
