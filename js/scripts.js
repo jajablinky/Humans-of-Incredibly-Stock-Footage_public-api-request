@@ -85,7 +85,8 @@ loadHumanData().then(() => {
         //  Displaying the modal window inserting the html
         // ------------------------------------------
         modalIndex = i;
-        const insertModalHtml = (index) => document.body.insertAdjacentHTML("beforeend",
+        const insertModalHtml = (index) => {
+          document.body.insertAdjacentHTML("beforeend",
           `<div class="modal-container" data-index-number="${index}">
                   <div class="modal">
                       <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
@@ -117,37 +118,49 @@ loadHumanData().then(() => {
                   </div>
               </div>`
         );
-        insertModalHtml(i);
 
-        //  Prev / Next button
-        // ------------------------------------------
-        const modalWindow = document.getElementsByClassName("modal-container")[0];
-        let modalPrev = document.getElementById('modal-prev');
-        let modalNext = document.getElementById('modal-next');;
-        modalPrev.addEventListener('click',() => {
-          let prev = modalIndex - 1;
-          modalWindow.remove()
-          insertModalHtml(prev);
-
-        });
-        modalNext.addEventListener('click',() => {
-          const next = modalIndex + 1;
-          modalWindow.remove()
-          insertModalHtml(next);
-          });
+        
         //  Close modal window
         // ------------------------------------------
+        const modalWindow = document.getElementsByClassName("modal-container")[0];
         const modalClose = document.getElementById("modal-close-btn");
         modalClose.addEventListener("click", (event) => {
           modalWindow.remove();
         });
+
+        let modalPrev = document.getElementById('modal-prev');
+        let modalNext = document.getElementById('modal-next');;
+
+        modalPrev.addEventListener('click',() => {
+          if (modalIndex > 0){
+          const modalWindow = document.getElementsByClassName("modal-container")[0];
+          let prev = modalIndex - 1;
+          modalIndex--
+          modalWindow.remove()
+          insertModalHtml(prev);
+        } 
+        });
+        modalNext.addEventListener('click',() => {
+          if (modalIndex < humanData.length - 1) {
+          const modalWindow = document.getElementsByClassName("modal-container")[0];
+          const next = modalIndex + 1;
+          modalIndex++
+          modalWindow.remove()
+          insertModalHtml(next);
+        }
+          });
+      }
+        insertModalHtml(i);
+
       }
     }
+    
   };
 
   // ------------------------------------------
   //  Event Listeners
   // ------------------------------------------
+  
 
   gallery.addEventListener("click", (event) => {
     // on empty space click doesnt register
@@ -155,14 +168,6 @@ loadHumanData().then(() => {
       displayModal(event);
     }
   });
-
-  search.addEventListener("click", (event) => {
-    // on empty space click doesnt register
-    if (event.target.className !== "gallery") {
-      displayModal(event);
-    }
-  });
-
 
   search.addEventListener("keyup", (event) => {
     let currentValue = event.target.value.toLowerCase();
