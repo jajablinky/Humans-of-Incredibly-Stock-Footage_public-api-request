@@ -128,18 +128,13 @@ loadHumanData().then(() => {
           let prev = modalIndex - 1;
           modalWindow.remove()
           insertModalHtml(prev);
-          modalPrev = document.getElementById('modal-prev');
-          console.log(modalPrev);
+
         });
         modalNext.addEventListener('click',() => {
           const next = modalIndex + 1;
           modalWindow.remove()
           insertModalHtml(next);
-          const modalClose = document.getElementById("modal-close-btn");
-          modalClose.addEventListener("click", (event) => {
-            modalWindow.remove();
           });
-        });
         //  Close modal window
         // ------------------------------------------
         const modalClose = document.getElementById("modal-close-btn");
